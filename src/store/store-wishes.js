@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const state = {
     wishes: {
         'ID1':{
@@ -88,9 +90,13 @@ const state = {
 
 const mutations = {
   updateWish(state, payload){
-    console.log('payload from mutation:', payload.id);
-    console.log('payload from mutation1:', state.wishes[payload.id].title);
+    // console.log('payload from mutation:', payload.id);
+    // console.log('payload from mutation1:', state.wishes[payload.id].title);
     Object.assign(state.wishes[payload.id],payload.updates);
+  },
+  deleteWish(state, id){
+    Vue.delete(state.wishes, id)
+    console.log('mutation delete: ', id);
   }
 
 }
@@ -100,7 +106,11 @@ const actions = {
     // console.log('update actions');
     console.log('payload: ', payload );
     commit('updateWish', payload)
-    
+  },
+  deleteWish({commit}, id){
+    // console.log('update actions');
+    console.log('delete wish id: ', id );
+    commit('deleteWish', id)
   }
 }
 
