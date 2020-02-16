@@ -9,6 +9,20 @@
       >
       </wish>
     </q-list>
+    <div class="absolute-bottom text-center q-mb-lg">
+      <q-btn 
+        unelevated 
+        round 
+        color="primary" 
+        icon="add" 
+        clickable
+        @click="showAddWish= !showAddWish"
+      /> 
+    </div>
+
+    <q-dialog :value="showAddWish">
+      <add-wish/>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -16,11 +30,17 @@
   import { mapGetters } from 'vuex'
 
   export default {
+    data(){
+      return{
+        showAddWish: false
+      }
+    },
     computed:{
       ...mapGetters('wishes', ['wishes'])
     },
     components:{
-      'wish': require('components/Wishes/Wish.vue').default
+      'wish': require('components/Wishes/Wish.vue').default,
+      'add-wish': require('components/Modals/AddWish.vue').default
     }
   }
 </script>
