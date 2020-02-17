@@ -65,7 +65,14 @@ module.exports = function (ctx) {
         'QDialog',
         'QCard',
         'QCardSection',
-        'QCardActions'
+        'QCardActions',
+        'QSpace',
+        'QInput',
+        'QDate',
+        'QTime',
+        'QPopupProxy',
+        'QSelect',
+        'QForm'
       ],
       directives: [
         'Ripple',
