@@ -21,7 +21,7 @@
     </div>
 
     <q-dialog :value="showAddWish">
-      <add-wish/>
+      <add-wish @close="showAddWish = false"/>
     </q-dialog>
   </q-page>
 </template>

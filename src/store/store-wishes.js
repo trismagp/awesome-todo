@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { uid } from 'quasar'
 
 const state = {
     wishes: {
@@ -97,8 +98,10 @@ const mutations = {
   deleteWish(state, id){
     Vue.delete(state.wishes, id)
     console.log('mutation delete: ', id);
+  },
+  addWish(state , payload){
+    Vue.set(state.wishes, payload.id, payload.wish)
   }
-
 }
 
 const actions = {
@@ -111,6 +114,11 @@ const actions = {
     // console.log('update actions');
     console.log('delete wish id: ', id );
     commit('deleteWish', id)
+  },
+  addWish({commit}, wish){
+    let wishId = uid()
+    let payload = {id: wishId, wish: wish}
+    commit('addWish',payload)
   }
 }
 

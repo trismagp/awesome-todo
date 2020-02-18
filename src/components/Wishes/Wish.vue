@@ -1,12 +1,10 @@
 <template>
     <q-item 
         clickable 
-        @click="updateWish({id: id, updates: {completed: !wish.completed}})"
-        >
+        @click="updateWish({id: id, updates: {completed: !wish.completed}})">
         <q-item-section 
             side 
-            top
-        >
+            top>
             <q-checkbox 
             :value="wish.completed" 
             no-pointer-events

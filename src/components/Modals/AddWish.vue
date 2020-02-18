@@ -4,7 +4,7 @@
           <div class="text-h6">Add wish</div>
           <q-space />
            <q-btn 
-            v-close-popup 
+            @click="closePopup"
             flat 
             round 
             dense 
@@ -83,6 +83,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data(){
     return{
@@ -101,6 +103,7 @@ export default {
     }
   },
   methods:{
+    ...mapActions('wishes', ['addWish']),
     submitForm(){
       console.log('submitform');
       this.$refs.name.validate()
@@ -110,7 +113,11 @@ export default {
     },
     submitWish(){
       console.log('submit wish');
-      
+      this.addWish(this.newWish)
+      this.$emit('close')
+    },
+    closePopup(){
+      this.$emit('close')
     }
   } 
 }
