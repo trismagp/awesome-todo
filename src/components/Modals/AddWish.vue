@@ -17,7 +17,8 @@
               <div class="col">
                 <q-select 
                   outlined 
-                  v-model="newWish.category" 
+                  clearable
+                  v-model="wishToSubmit.category" 
                   :options="options" 
                   :rules="[val => !!val || 'Field is required']"
                   label="Outlined" />
@@ -27,7 +28,8 @@
               <div class="col">
                 <q-input 
                   outlined 
-                  v-model="newWish.title" 
+                  clearable
+                  v-model="wishToSubmit.title" 
                   ref="name"
                   label="Title" 
                   :rules="[val => !!val || 'Field is required']" />
@@ -35,34 +37,34 @@
             </div>
             <div class="row q-mb-sm">
               <div class="col">
-                <q-input outlined v-model="newWish.description" label="Description" type="textarea"/>
+                <q-input clearable outlined v-model="wishToSubmit.description" label="Description" type="textarea"/>
               </div>
             </div>
             <div class="row q-mb-sm">
               <div class="col">
-                <q-input outlined v-model="newWish.url" label="Url" />
+                <q-input clearable outlined v-model="wishToSubmit.url" label="Url" />
               </div>
             </div>
             <div class="row q-mb-sm">
               <div class="col">
-                <q-input outlined v-model="newWish.date" label="Date">
+                <q-input clearable outlined v-model="wishToSubmit.date" label="Date">
                   <template v-slot:append>
                     <q-icon name="event" class="cursor-pointer">
                       <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                        <q-date v-model="newWish.date" @input="() => $refs.qDateProxy.hide()" />
+                        <q-date v-model="wishToSubmit.date" @input="() => $refs.qDateProxy.hide()" />
                       </q-popup-proxy>
                     </q-icon>
                   </template>
                 </q-input>
               </div>
             </div>
-            <div class="row q-mb-sm">
+            <div class="row q-mb-sm" v-if="wishToSubmit.date">
               <div class="col">
-                <q-input outlined v-model="newWish.time" label="Time">
+                <q-input clearable outlined v-model="wishToSubmit.time" label="Time">
                   <template v-slot:append>
                     <q-icon name="access_time" class="cursor-pointer">
                       <q-popup-proxy transition-show="scale" transition-hide="scale">
-                        <q-time v-model="newWish.time" />
+                        <q-time v-model="wishToSubmit.time" />
                       </q-popup-proxy>
                     </q-icon>
                   </template>
@@ -88,7 +90,7 @@ import { mapActions } from 'vuex'
 export default {
   data(){
     return{
-      newWish:{
+      wishToSubmit:{
         category: '',
         title: '',
         description: '',
@@ -113,7 +115,7 @@ export default {
     },
     submitWish(){
       console.log('submit wish');
-      this.addWish(this.newWish)
+      this.addWish(this.wishToSubmit)
       this.$emit('close')
     },
     closePopup(){

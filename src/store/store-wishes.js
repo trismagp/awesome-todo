@@ -28,63 +28,64 @@ const state = {
           url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
           date: '2020.02.27',
           completed: false
-        },
-        'ID4':{
-          category: 'Weekend',
-          title: 'Madrid',
-          description: '',
-          url: '',
-          date: '2020.02.22',
-          completed: false
-        },
-        'ID5':{
-          category: 'Weekend',
-          title: 'Lisbon',
-          description: '',
-          url: '',
-          date: '',
-          completed: false
-        },
-        'ID6':{
-          category: 'Weekend',
-          title: 'Roma',
-          description: '',
-          url: '',
-          date: '',
-          completed: false
-        },
-        'ID7':{
-          category: 'Hiking',
-          title: 'Rocher de naye',
-          description: '',
-          url: '',
-          date: '',
-          completed: false
-        },
-        'ID8':{
-          category: 'Hiking',
-          title: 'Saleve',
-          description: '',
-          url: '',
-          date: '',
-          completed: false
-        },
-        'ID9':{
-          category: 'Restaurant',
-          title: 'George Blanc',
-          description: '3 étoiles',
-          url: '',
-          date: '2020.05.15',
-          completed: false
-        },
-        'ID10':{
-          category: 'Restaurant',
-          title: 'Marc Vera',
-          description: '3 étoiles',
-          url: '',
-          date: '2020.10.15',
-          completed: false
         }
+        // ,
+        // 'ID4':{
+        //   category: 'Weekend',
+        //   title: 'Madrid',
+        //   description: '',
+        //   url: '',
+        //   date: '2020.02.22',
+        //   completed: false
+        // },
+        // 'ID5':{
+        //   category: 'Weekend',
+        //   title: 'Lisbon',
+        //   description: '',
+        //   url: '',
+        //   date: '',
+        //   completed: false
+        // },
+        // 'ID6':{
+        //   category: 'Weekend',
+        //   title: 'Roma',
+        //   description: '',
+        //   url: '',
+        //   date: '',
+        //   completed: false
+        // },
+        // 'ID7':{
+        //   category: 'Hiking',
+        //   title: 'Rocher de naye',
+        //   description: '',
+        //   url: '',
+        //   date: '',
+        //   completed: false
+        // },
+        // 'ID8':{
+        //   category: 'Hiking',
+        //   title: 'Saleve',
+        //   description: '',
+        //   url: '',
+        //   date: '',
+        //   completed: false
+        // },
+        // 'ID9':{
+        //   category: 'Restaurant',
+        //   title: 'George Blanc',
+        //   description: '3 étoiles',
+        //   url: '',
+        //   date: '2020.05.15',
+        //   completed: false
+        // },
+        // 'ID10':{
+        //   category: 'Restaurant',
+        //   title: 'Marc Vera',
+        //   description: '3 étoiles',
+        //   url: '',
+        //   date: '2020.10.15',
+        //   completed: false
+        // }
     }
 
 }

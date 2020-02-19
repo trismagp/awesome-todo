@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list separator bordered>
+    <q-list v-if="Object.keys(wishes).length" separator bordered>
       <wish
         v-for="(wish, key) in wishes"
         :key=key
