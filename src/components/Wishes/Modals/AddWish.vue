@@ -1,40 +1,18 @@
 <template>
     <q-card>
-        <q-card-section class="row">
-          <div class="text-h6">Add wish</div>
-          <q-space />
-           <q-btn 
-            @click="closePopup"
-            flat 
-            round 
-            dense 
-            icon="close" />
-        </q-card-section>
+     
+      <modal-header @close="closePopup">Add wish</modal-header>
 
         <q-form @submit.prevent="submitForm">
           <q-card-section>
-            <div class="row q-mb-sm">
-              <div class="col">
-                <q-select 
-                  outlined 
-                  clearable
-                  v-model="wishToSubmit.category" 
-                  :options="options" 
-                  :rules="[val => !!val || 'Field is required']"
-                  label="Outlined" />
-              </div>
-            </div>
-            <div class="row q-mb-sm">
-              <div class="col">
-                <q-input 
-                  outlined 
-                  clearable
-                  v-model="wishToSubmit.title" 
-                  ref="name"
-                  label="Title" 
-                  :rules="[val => !!val || 'Field is required']" />
-              </div>
-            </div>
+            <modal-wish-category 
+              :category.sync="wishToSubmit.category"
+              :categories="this.categories">
+            </modal-wish-category>
+            <modal-wish-title
+              :title.sync="wishToSubmit.title">
+            </modal-wish-title>
+            
             <div class="row q-mb-sm">
               <div class="col">
                 <q-input clearable outlined v-model="wishToSubmit.description" label="Description" type="textarea"/>
@@ -99,7 +77,7 @@ export default {
         time: '',
         completed: false
       },
-      options: [
+      categories: [
         'Food', 'Hiking', 'YesWeekend', 'Restaurant', 'Concert'
       ]
     }
@@ -108,8 +86,10 @@ export default {
     ...mapActions('wishes', ['addWish']),
     submitForm(){
       console.log('submitform');
-      this.$refs.name.validate()
-      if(!this.$refs.name.hasError){
+      console.log(this.$refs);
+      
+      this.$refs.title.validate()
+      if(!this.$refs.title.hasError){
         this.submitWish()
       }
     },
@@ -121,6 +101,11 @@ export default {
     closePopup(){
       this.$emit('close')
     }
+  },
+  components:{
+    'modal-header': require('components/Wishes/Modals/Shared/ModalHeader.vue').default,
+    'modal-wish-category': require('components/Wishes/Modals/Shared/ModalWishCategory.vue').default,
+    'modal-wish-title': require('components/Wishes/Modals/Shared/ModalWishTitle.vue').default
   } 
 }
 </script>

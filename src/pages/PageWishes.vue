@@ -40,7 +40,7 @@
     },
     components:{
       'wish': require('components/Wishes/Wish.vue').default,
-      'add-wish': require('components/Modals/AddWish.vue').default
+      'add-wish': require('components/Wishes/Modals/AddWish.vue').default
     }
   }
 </script>
