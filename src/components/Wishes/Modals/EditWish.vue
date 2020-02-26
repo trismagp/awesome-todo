@@ -1,7 +1,7 @@
 <template>
     <q-card>
      
-      <modal-header @close="closePopup">Add wish</modal-header>
+      <modal-header @close="closePopup">Edit wish</modal-header>
 
         <q-form @submit.prevent="submitForm">
           <q-card-section>
@@ -67,17 +67,10 @@
 import { mapActions } from 'vuex'
 
 export default {
+  props: ['wish','id'],
   data(){
     return{
-      wishToSubmit:{
-        category: '',
-        title: '',
-        description: '',
-        url: '',
-        date: '',
-        time: '',
-        completed: false
-      },
+      wishToSubmit:{},
       categories: [
         'Food', 'Hiking', 'YesWeekend', 'Restaurant', 'Concert'
       ]
@@ -104,6 +97,9 @@ export default {
     'modal-header': require('components/Wishes/Modals/Shared/ModalHeader.vue').default,
     'modal-wish-category': require('components/Wishes/Modals/Shared/ModalWishCategory.vue').default,
     'modal-wish-title': require('components/Wishes/Modals/Shared/ModalWishTitle.vue').default
-  } 
+  },
+  mounted(){    
+    this.wishToSubmit = Object.assign({}, this.wish)
+  }
 }
 </script>
