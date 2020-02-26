@@ -10,7 +10,8 @@
               :categories="this.categories">
             </modal-wish-category>
             <modal-wish-title
-              :title.sync="wishToSubmit.title">
+              :title.sync="wishToSubmit.title"
+              ref="wishToSubmit">
             </modal-wish-title>
             
             <div class="row q-mb-sm">
@@ -88,8 +89,8 @@ export default {
       console.log('submitform');
       console.log(this.$refs);
       
-      this.$refs.title.validate()
-      if(!this.$refs.title.hasError){
+      this.$refs.wishToSubmit.$refs.title.validate()
+      if(!this.$refs.wishToSubmit.$refs.title.hasError){
         this.submitWish()
       }
     },
