@@ -31,6 +31,11 @@
         showAddWish: false
       }
     },
+    mounted(){
+      this.$root.$on('showAddWish', () => {
+        this.showAddWish = true
+      })
+    },
     computed:{
       ...mapGetters('wishes', ['wishesTodo','wishesCompleted'])
     },

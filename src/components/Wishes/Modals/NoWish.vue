@@ -5,7 +5,12 @@
         </template>
         No wishes to do today
         <template v-slot:action>
-            <q-btn flat color="primary" label="Add wish" />
+            <q-btn
+                @click="$root.$emit('showAddWish')"
+                clickable
+                flat 
+                color="primary" 
+                label="Add wish" />
         </template>
     </q-banner>
 </template>
