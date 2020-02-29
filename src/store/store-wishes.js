@@ -87,13 +87,10 @@ const state = {
         //   completed: false
         // }
     }
-
 }
 
 const mutations = {
   updateWish(state, payload){
-    // console.log('payload from mutation:', payload.id);
-    // console.log('payload from mutation1:', state.wishes[payload.id].title);
     Object.assign(state.wishes[payload.id],payload.updates);
   },
   deleteWish(state, id){
@@ -124,9 +121,24 @@ const actions = {
 }
 
 const getters = {
-    wishes: (state) => {
-        return state.wishes
-    }
+  wishesTodo: (state) => {
+      let wishes = {}
+      Object.keys(state.wishes).forEach(function(id){
+        if (!state.wishes[id].completed){
+          wishes[id] = state.wishes[id]
+        }
+      })
+      return wishes
+  },
+  wishesCompleted: (state) => {
+    let wishes = {}
+    Object.keys(state.wishes).forEach(function(id){
+      if (state.wishes[id].completed){
+        wishes[id] = state.wishes[id]
+      }
+    })
+    return wishes
+  }
 }
 
 export default{

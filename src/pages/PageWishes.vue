@@ -1,14 +1,10 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list v-if="Object.keys(wishes).length" separator bordered>
-      <wish
-        v-for="(wish, key) in wishes"
-        :key=key
-        :id=key
-        :wish=wish
-      >
-      </wish>
-    </q-list>
+    
+    <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+    <no-wish v-else></no-wish>
+    <wishes-completed v-if="Object.keys(wishesCompleted).length" :wishesCompleted="wishesCompleted"/>
+    
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn 
         unelevated 
@@ -36,10 +32,12 @@
       }
     },
     computed:{
-      ...mapGetters('wishes', ['wishes'])
+      ...mapGetters('wishes', ['wishesTodo','wishesCompleted'])
     },
     components:{
-      'wish': require('components/Wishes/Wish.vue').default,
+      'no-wish': require('components/Wishes/Modals/NoWish.vue').default,
+      'wishes-todo': require('components/Wishes/Modals/WishesTodo.vue').default,
+      'wishes-completed': require('components/Wishes/Modals/WishesCompleted.vue').default,
       'add-wish': require('components/Wishes/Modals/AddWish.vue').default
     }
   }

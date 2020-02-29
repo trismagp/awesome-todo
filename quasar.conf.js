@@ -72,7 +72,8 @@ module.exports = function (ctx) {
         'QTime',
         'QPopupProxy',
         'QSelect',
-        'QForm'
+        'QForm',
+        'QBanner'
       ],
       directives: [
         'Ripple',
