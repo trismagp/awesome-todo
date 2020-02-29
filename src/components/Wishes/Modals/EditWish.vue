@@ -77,7 +77,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions('wishes', ['addWish']),
+    ...mapActions('wishes', ['updateWish']),
     submitForm(){      
       this.$refs.wishToSubmit.$refs.title.validate()
       if(!this.$refs.wishToSubmit.$refs.title.hasError){
@@ -86,7 +86,7 @@ export default {
     },
     submitWish(){
       console.log('submit wish');
-      this.addWish(this.wishToSubmit)
+      this.updateWish({id: this.id, updates: this.wishToSubmit})
       this.$emit('close')
     },
     closePopup(){
