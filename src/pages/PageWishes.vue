@@ -1,5 +1,6 @@
 <template>
   <q-page class="q-pa-md">
+    <search-bar />
     
     <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
     <no-wish v-else></no-wish>
@@ -43,7 +44,8 @@
       'no-wish': require('components/Wishes/Modals/NoWish.vue').default,
       'wishes-todo': require('components/Wishes/Modals/WishesTodo.vue').default,
       'wishes-completed': require('components/Wishes/Modals/WishesCompleted.vue').default,
-      'add-wish': require('components/Wishes/Modals/AddWish.vue').default
+      'add-wish': require('components/Wishes/Modals/AddWish.vue').default,
+      'search-bar': require('components/Wishes/Tools/SearchBar.vue').default
     }
   }
 </script>

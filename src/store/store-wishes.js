@@ -29,64 +29,8 @@ const state = {
           date: '2020.02.27',
           completed: false
         }
-        // ,
-        // 'ID4':{
-        //   category: 'Weekend',
-        //   title: 'Madrid',
-        //   description: '',
-        //   url: '',
-        //   date: '2020.02.22',
-        //   completed: false
-        // },
-        // 'ID5':{
-        //   category: 'Weekend',
-        //   title: 'Lisbon',
-        //   description: '',
-        //   url: '',
-        //   date: '',
-        //   completed: false
-        // },
-        // 'ID6':{
-        //   category: 'Weekend',
-        //   title: 'Roma',
-        //   description: '',
-        //   url: '',
-        //   date: '',
-        //   completed: false
-        // },
-        // 'ID7':{
-        //   category: 'Hiking',
-        //   title: 'Rocher de naye',
-        //   description: '',
-        //   url: '',
-        //   date: '',
-        //   completed: false
-        // },
-        // 'ID8':{
-        //   category: 'Hiking',
-        //   title: 'Saleve',
-        //   description: '',
-        //   url: '',
-        //   date: '',
-        //   completed: false
-        // },
-        // 'ID9':{
-        //   category: 'Restaurant',
-        //   title: 'George Blanc',
-        //   description: '3 étoiles',
-        //   url: '',
-        //   date: '2020.05.15',
-        //   completed: false
-        // },
-        // 'ID10':{
-        //   category: 'Restaurant',
-        //   title: 'Marc Vera',
-        //   description: '3 étoiles',
-        //   url: '',
-        //   date: '2020.10.15',
-        //   completed: false
-        // }
-    }
+    },
+    search: ""
 }
 
 const mutations = {
@@ -99,42 +43,66 @@ const mutations = {
   },
   addWish(state , payload){
     Vue.set(state.wishes, payload.id, payload.wish)
+  },
+  setSearch(state, search){
+    state.search = search
   }
 }
 
 const actions = {
   updateWish({commit}, payload){
-    // console.log('update actions');
     console.log('payload: ', payload );
     commit('updateWish', payload)
   },
   deleteWish({commit}, id){
-    // console.log('update actions');
-    console.log('delete wish id: ', id );
     commit('deleteWish', id)
   },
   addWish({commit}, wish){
     let wishId = uid()
     let payload = {id: wishId, wish: wish}
     commit('addWish',payload)
+  },
+  setSearch({commit}, search){
+    commit('setSearch', search)
   }
 }
 
 const getters = {
-  wishesTodo: (state) => {
-      let wishes = {}
+  getWishesFiltered: (state) => {
+    let wishesFiltered = {}
+    if(state.search){
       Object.keys(state.wishes).forEach(function(id){
-        if (!state.wishes[id].completed){
-          wishes[id] = state.wishes[id]
+        let wishtitle = state.wishes[id].title.toLowerCase()
+        console.log(wishtitle.includes('c'));
+        
+        if (state.wishes[id].title.toLowerCase().includes(state.search.toLowerCase())){
+          wishesFiltered[id] = state.wishes[id]
         }
-      })
-      return wishes
+      })     
+      return wishesFiltered
+    }
+    
+    return state.wishes
   },
-  wishesCompleted: (state) => {
+  wishesTodo: (state, getters) => {
+    let wishesFiltered = getters.getWishesFiltered
+    
     let wishes = {}
-    Object.keys(state.wishes).forEach(function(id){
-      if (state.wishes[id].completed){
-        wishes[id] = state.wishes[id]
+    
+    Object.keys(wishesFiltered).forEach(function(id){
+      if (!wishesFiltered[id].completed){
+        wishes[id] = wishesFiltered[id]
+      }
+    })
+    return wishes
+  },
+  wishesCompleted: (state, getters) => {
+    let wishesFiltered = getters.getWishesFiltered
+
+    let wishes = {}
+    Object.keys(wishesFiltered).forEach(function(id){
+      if (wishesFiltered[id].completed){
+        wishes[id] = wishesFiltered[id]
       }
     })
     return wishes
