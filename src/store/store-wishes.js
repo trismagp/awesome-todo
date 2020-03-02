@@ -30,7 +30,8 @@ const state = {
           completed: false
         }
     },
-    search: ""
+    search: "",
+    sort: "date"
 }
 
 const mutations = {
@@ -68,24 +69,50 @@ const actions = {
 }
 
 const getters = {
-  getWishesFiltered: (state) => {
+  wishesSorted: (state) => {
+    let wishesSorted = {},
+      keySorted = {}
+    
+    keySorted = Object.keys(state.wishes)
+
+    keySorted.sort((a,b)=>{
+      let paramA =  state.wishes[a][state.sort],
+        paramB =  state.wishes[b][state.sort]
+
+      if (paramA > paramB) return 1
+      if (paramA < paramB) return -1
+      return 0
+    })
+
+    keySorted.forEach((key)=>{
+      wishesSorted[key] = state.wishes[key]
+    })
+
+    console.log(wishesSorted);
+
+    return wishesSorted
+  },
+  wishesFiltered: (state, getters) => {
     let wishesFiltered = {}
+
+    let wishesSorted = getters.wishesSorted
+
     if(state.search){
-      Object.keys(state.wishes).forEach(function(id){
-        let wishtitle = state.wishes[id].title.toLowerCase()
+      Object.keys(wishesSorted).forEach(function(id){
+        let wishtitle = wishesSorted[id].title.toLowerCase()
         console.log(wishtitle.includes('c'));
         
-        if (state.wishes[id].title.toLowerCase().includes(state.search.toLowerCase())){
-          wishesFiltered[id] = state.wishes[id]
+        if (wishesSorted[id].title.toLowerCase().includes(state.search.toLowerCase())){
+          wishesFiltered[id] = wishesSorted[id]
         }
       })     
       return wishesFiltered
     }
     
-    return state.wishes
+    return wishesSorted
   },
   wishesTodo: (state, getters) => {
-    let wishesFiltered = getters.getWishesFiltered
+    let wishesFiltered = getters.wishesFiltered
     
     let wishes = {}
     
@@ -97,7 +124,7 @@ const getters = {
     return wishes
   },
   wishesCompleted: (state, getters) => {
-    let wishesFiltered = getters.getWishesFiltered
+    let wishesFiltered = getters.wishesFiltered
 
     let wishes = {}
     Object.keys(wishesFiltered).forEach(function(id){

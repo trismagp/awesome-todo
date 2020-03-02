@@ -3,9 +3,16 @@
     <search-bar />
     
     <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
-    <no-wish v-else></no-wish>
-    <wishes-completed v-if="Object.keys(wishesCompleted).length" :wishesCompleted="wishesCompleted"/>
-    
+
+    <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
+      <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
+      <wishes-completed :wishesCompleted="wishesCompleted"/>
+    </div>
+
+    <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
+      <h3>No results</h3>
+    </div>
+
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn 
         unelevated 
@@ -38,7 +45,7 @@
       })
     },
     computed:{
-      ...mapGetters('wishes', ['wishesTodo','wishesCompleted'])
+      ...mapGetters('wishes', ['wishesTodo','wishesCompleted', 'wishesFiltered'])
     },
     components:{
       'no-wish': require('components/Wishes/Modals/NoWish.vue').default,
