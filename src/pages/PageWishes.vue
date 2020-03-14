@@ -1,9 +1,10 @@
 <template>
   <q-page class="q-pa-md">
     <search-bar />
-    
-    <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+    <sort :sort.sync="this.sort"/>
 
+    <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+    
     <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
       <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
       <wishes-completed :wishesCompleted="wishesCompleted"/>
@@ -36,7 +37,8 @@
   export default {
     data(){
       return{
-        showAddWish: false
+        showAddWish: false,
+        sort: "Date"
       }
     },
     mounted(){
@@ -52,7 +54,8 @@
       'wishes-todo': require('components/Wishes/Modals/WishesTodo.vue').default,
       'wishes-completed': require('components/Wishes/Modals/WishesCompleted.vue').default,
       'add-wish': require('components/Wishes/Modals/AddWish.vue').default,
-      'search-bar': require('components/Wishes/Tools/SearchBar.vue').default
+      'search-bar': require('components/Wishes/Tools/SearchBar.vue').default,
+      'sort': require('components/Wishes/Tools/Sort.vue').default
     }
   }
 </script>

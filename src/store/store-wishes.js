@@ -4,7 +4,7 @@ import { uid } from 'quasar'
 const state = {
     wishes: {
         'ID1':{
-          category: 'Food',
+          category: 'Restaurant',
           title: 'Chicken Cacciatore',
           description: '',
           url: 'https://cafedelites.com/chicken-cacciatore/',
@@ -14,10 +14,10 @@ const state = {
         },
         'ID2':{
           category: 'Food',
-          title: 'Creamy garlic chicken breasts',
+          title: 'Tarte garlic chicken breasts',
           description: '',
           url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
-          date: '2020.02.22',
+          date: '2020.03.22',
           time: '12:45',
           completed: false
         },
@@ -26,12 +26,12 @@ const state = {
           title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
           description: '',
           url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
-          date: '2020.02.27',
+          date: '2020.06.27',
           completed: false
         }
     },
     search: "",
-    sort: "date"
+    sort: ""
 }
 
 const mutations = {
@@ -47,6 +47,9 @@ const mutations = {
   },
   setSearch(state, search){
     state.search = search
+  },
+  setSort(state, sort){
+    state.sort = sort
   }
 }
 
@@ -65,6 +68,9 @@ const actions = {
   },
   setSearch({commit}, search){
     commit('setSearch', search)
+  },
+  setSort({commit}, sort){
+    commit('setSort', sort)
   }
 }
 
@@ -87,9 +93,6 @@ const getters = {
     keySorted.forEach((key)=>{
       wishesSorted[key] = state.wishes[key]
     })
-
-    console.log(wishesSorted);
-
     return wishesSorted
   },
   wishesFiltered: (state, getters) => {
