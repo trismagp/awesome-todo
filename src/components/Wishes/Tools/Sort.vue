@@ -4,14 +4,13 @@
         map-options
         emit-value
         v-model="sortBy" 
+        class="col q-ml-sm"
         :options="options" 
         label="Sort by" 
-        stack-label/>
+        stack-label
+        filled/>
 
 </template>
-
-
-
 
 <script>
 import { mapState, mapActions } from "vuex";
@@ -54,6 +53,6 @@ export default {
 
 <style scoped>
     .q-select {
-        flex: 0 0 112px;
+        flex: 0 0 120px;
     }
 </style>

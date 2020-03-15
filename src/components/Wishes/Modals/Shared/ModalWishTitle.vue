@@ -7,13 +7,19 @@
                 :value="title"
                 @input="$emit('update:title', $event)" 
                 ref="title"
-                label="Title" 
+                label="Title"
+                v-select-all
                 :rules="[val => !!val || 'Field is required']" />
         </div>
     </div>
 </template>
 <script>
+import { selectAll } from "src/directives/directive-select-all";
+
 export default {
-        props: ['title']
+        props: ['title'],
+        directives:{
+            selectAll
+        }
 }
 </script>

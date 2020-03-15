@@ -1,6 +1,7 @@
 <template>
     <q-item 
         clickable 
+        v-touch-hold:1000.mouse="showEditWishModal"
         @click="updateWish({id: id, updates: {completed: !wish.completed}})">
         <q-item-section 
             side 
@@ -12,15 +13,16 @@
         </q-item-section>
         <q-item-section>
             <q-item-label>{{wish.category}}</q-item-label>
-            <q-item-label caption>
-                {{wish.title}}
+            <q-item-label 
+                caption
+                v-html="$options.filters.searchHighlight(wish.title,search)">
             </q-item-label>
             <q-item-label caption>
                 <small>{{wish.url}}</small>
             </q-item-label>
         </q-item-section>
         <q-item-section side top>
-            <q-item-label caption>{{wish.date}}</q-item-label>
+            <q-item-label caption>{{ wish.date | niceDate }}</q-item-label>
             <q-item-label caption>
                 <small>{{wish.time}}</small>
             </q-item-label>
@@ -28,7 +30,7 @@
         <q-item-section side top>
             <div class="row">
                 <q-btn
-                    @click.stop="showEditWish=true"
+                    @click.stop="showEditWishModal"
                     clickable 
                     flat 
                     round 
@@ -55,7 +57,9 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import { mapActions, mapState } from 'vuex'
+    import { date } from 'quasar'
+    const { formatDate } = date
 
     export default {
         props: ['wish', 'id'],
@@ -63,6 +67,9 @@
             return{
                 showEditWish: false
             }
+        },
+        computed:{
+            ...mapState('wishes', ['search'])
         },
         methods:{
             ...mapActions('wishes', ['updateWish','deleteWish']),
@@ -75,6 +82,29 @@
                 }).onOk(() => {
                     this.deleteWish(id)
                 })
+            },
+            showEditWishModal(){
+                this.showEditWish = true
+            }
+        },
+        filters:{
+            niceDate(value){  
+                let year = value.substring(0,4)
+                let month = value.substring(5,7)
+                let day = value.substring(8,10)
+                let valueDate = date.buildDate({year: year, month: month, date: day})
+
+                return date.formatDate(valueDate, 'MMM D')
+            },
+            searchHighlight(title, search){
+                let searchRegExp = new RegExp(search, 'ig')
+                
+                if (search.length){
+                    return title.replace(searchRegExp, (match) => {
+                        return '<span class="bg-yellow-6">' + match + '</span>'
+                    })
+                }    
+                return title
             }
         },
         components:{

@@ -1,8 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <search-bar />
-    <sort :sort.sync="this.sort"/>
-
+    <div class="row">
+      <search-bar />
+      <sort :sort.sync="this.sort"/>
+    </div>
     <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
     
     <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
