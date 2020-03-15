@@ -4,15 +4,17 @@
       <search-bar />
       <sort :sort.sync="this.sort"/>
     </div>
-    <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
-    
-    <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
-      <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
-      <wishes-completed :wishesCompleted="wishesCompleted"/>
-    </div>
+    <div class="relative-position">
+      <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+      
+      <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
+        <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
+        <wishes-completed :wishesCompleted="wishesCompleted"/>
+      </div>
 
-    <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
-      <h3>No results</h3>
+      <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
+        <h3>No results</h3>
+      </div>
     </div>
 
     <div class="absolute-bottom text-center q-mb-lg">

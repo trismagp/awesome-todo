@@ -7,9 +7,8 @@
             side 
             top>
             <q-checkbox 
-            :value="wish.completed" 
-            no-pointer-events
-            />
+                :value="wish.completed" 
+                no-pointer-events/>
         </q-item-section>
         <q-item-section>
             <q-item-label>{{wish.category}}</q-item-label>

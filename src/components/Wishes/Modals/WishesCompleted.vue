@@ -1,4 +1,8 @@
 <template>
+  <transition
+    appear
+    enter-active-class="animated zoomIn"
+    leave-active-class="animated zoomOut">
     <div class="q-mt-lg">
       <list-header
         bgColor="bg-blue-4">
@@ -9,11 +13,11 @@
           v-for="(wish, key) in wishesCompleted"
           :key=key
           :id=key
-          :wish=wish
-        >
+          :wish=wish>
         </wish>
       </q-list>
     </div>
+  </transition>
 </template>
 
 <script>
