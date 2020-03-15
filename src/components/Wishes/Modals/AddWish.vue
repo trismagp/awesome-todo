@@ -65,6 +65,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import mixinAddEditWish from 'src/mixins/mixin-add-edit-wish'
 
 export default {
   data(){
@@ -83,27 +84,13 @@ export default {
       ]
     }
   },
+  mixins: [mixinAddEditWish],
   methods:{
     ...mapActions('wishes', ['addWish']),
-    submitForm(){      
-      this.$refs.wishToSubmit.$refs.title.validate()
-      if(!this.$refs.wishToSubmit.$refs.title.hasError){
-        this.submitWish()
-      }
-    },
     submitWish(){
-      console.log('submit wish');
       this.addWish(this.wishToSubmit)
       this.$emit('close')
-    },
-    closePopup(){
-      this.$emit('close')
     }
-  },
-  components:{
-    'modal-header': require('components/Wishes/Modals/Shared/ModalHeader.vue').default,
-    'modal-wish-category': require('components/Wishes/Modals/Shared/ModalWishCategory.vue').default,
-    'modal-wish-title': require('components/Wishes/Modals/Shared/ModalWishTitle.vue').default
-  } 
+  }
 }
 </script>

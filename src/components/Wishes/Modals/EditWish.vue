@@ -65,9 +65,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import mixinAddEditWish from 'src/mixins/mixin-add-edit-wish'
 
 export default {
   props: ['wish','id'],
+  mixins: [mixinAddEditWish],
   data(){
     return{
       wishToSubmit:{},
@@ -78,25 +80,11 @@ export default {
   },
   methods:{
     ...mapActions('wishes', ['updateWish']),
-    submitForm(){      
-      this.$refs.wishToSubmit.$refs.title.validate()
-      if(!this.$refs.wishToSubmit.$refs.title.hasError){
-        this.submitWish()
-      }
-    },
     submitWish(){
       console.log('submit wish');
       this.updateWish({id: this.id, updates: this.wishToSubmit})
       this.$emit('close')
-    },
-    closePopup(){
-      this.$emit('close')
     }
-  },
-  components:{
-    'modal-header': require('components/Wishes/Modals/Shared/ModalHeader.vue').default,
-    'modal-wish-category': require('components/Wishes/Modals/Shared/ModalWishCategory.vue').default,
-    'modal-wish-title': require('components/Wishes/Modals/Shared/ModalWishTitle.vue').default
   },
   mounted(){    
     this.wishToSubmit = Object.assign({}, this.wish)

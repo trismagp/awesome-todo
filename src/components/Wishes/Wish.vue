@@ -94,7 +94,7 @@
                 let day = value.substring(8,10)
                 let valueDate = date.buildDate({year: year, month: month, date: day})
 
-                return date.formatDate(valueDate, 'MMM D')
+                return date.formatDate(valueDate, 'MMM D, YYYY')
             },
             searchHighlight(title, search){
                 let searchRegExp = new RegExp(search, 'ig')
