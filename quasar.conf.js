@@ -73,7 +73,8 @@ module.exports = function (ctx) {
         'QPopupProxy',
         'QSelect',
         'QForm',
-        'QBanner'
+        'QBanner',
+        'QScrollArea'
       ],
       directives: [
         'Ripple',

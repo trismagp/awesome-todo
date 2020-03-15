@@ -28,6 +28,58 @@ const state = {
           url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
           date: '2020.06.27',
           completed: false
+        },
+        'ID4':{
+          category: 'Restaurant',
+          title: 'Chicken Cacciatore',
+          description: '',
+          url: 'https://cafedelites.com/chicken-cacciatore/',
+          date: '2020.02.15',
+          time: '12:30',
+          completed: false
+        },
+        'ID5':{
+          category: 'Food',
+          title: 'Tarte garlic chicken breasts',
+          description: '',
+          url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
+          date: '2020.03.22',
+          time: '12:45',
+          completed: false
+        },
+        'ID6':{
+          category: 'Food',
+          title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
+          description: '',
+          url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
+          date: '2020.06.27',
+          completed: false
+        },
+        'ID7':{
+          category: 'Restaurant',
+          title: 'Chicken Cacciatore',
+          description: '',
+          url: 'https://cafedelites.com/chicken-cacciatore/',
+          date: '2020.02.15',
+          time: '12:30',
+          completed: false
+        },
+        'ID8':{
+          category: 'Food',
+          title: 'Tarte garlic chicken breasts',
+          description: '',
+          url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
+          date: '2020.03.22',
+          time: '12:45',
+          completed: false
+        },
+        'ID9':{
+          category: 'Food',
+          title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
+          description: '',
+          url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
+          date: '2020.06.27',
+          completed: false
         }
     },
     search: "",

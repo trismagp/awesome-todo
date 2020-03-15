@@ -1,24 +1,26 @@
 <template>
-  <q-page class="q-pa-md">
-    <div class="row">
-      <search-bar />
-      <sort :sort.sync="this.sort"/>
-    </div>
-    <div class="relative-position">
-      <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
-      
-      <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
-        <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
-        <wishes-completed :wishesCompleted="wishesCompleted"/>
+  <q-page>
+    <div class="q-pa-md absolute full-width full-height column">
+      <div class="row">
+        <search-bar />
+        <sort :sort.sync="this.sort"/>
       </div>
 
-      <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
-        <h3>No results</h3>
-      </div>
-    </div>
+      <q-scroll-area class="q-scroll-area-wishes">
+        <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+        <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
+          <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
+          <wishes-completed :wishesCompleted="wishesCompleted"/>
+        </div>
 
-    <div class="absolute-bottom text-center q-mb-lg">
+        <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
+          <h3>No results</h3>
+        </div>
+      </q-scroll-area>
+    </div>
+        <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
       <q-btn 
+        class="all-pointer-events"
         unelevated 
         round 
         color="primary" 
@@ -26,11 +28,10 @@
         clickable
         @click="showAddWish= !showAddWish"
       /> 
-    </div>
-
-    <q-dialog :value="showAddWish">
+          <q-dialog :value="showAddWish">
       <add-wish @close="showAddWish = false"/>
     </q-dialog>
+        </div>
   </q-page>
 </template>
 
@@ -62,3 +63,10 @@
     }
   }
 </script>
+
+<style scoped>
+  .q-scroll-area-wishes{
+    display: flex;
+    flex-grow: 1;
+  }
+</style>
