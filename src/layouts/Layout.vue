@@ -2,6 +2,7 @@
   <q-layout view="hHh lpR lFf">
     <q-header elevated>
       <q-toolbar>
+         <q-btn class="absolute-right" to="/auth" flat icon-right="account_circle" label="Login"/>
         <q-toolbar-title class="absolute-center">
           Awesome todo
         </q-toolbar-title>
