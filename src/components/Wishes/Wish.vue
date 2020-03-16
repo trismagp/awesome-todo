@@ -23,7 +23,7 @@
         <q-item-section side top>
             <q-item-label caption>{{ wish.date | niceDate }}</q-item-label>
             <q-item-label caption>
-                <small>{{wish.time}}</small>
+                <small>{{wish.time | timeFormat(settings.show12HourFormat) }}</small>
             </q-item-label>
         </q-item-section>
         <q-item-section side top>
@@ -68,7 +68,8 @@
             }
         },
         computed:{
-            ...mapState('wishes', ['search'])
+            ...mapState('wishes', ['search']),
+            ...mapState('settings', ['settings'])
         },
         methods:{
             ...mapActions('wishes', ['updateWish','deleteWish']),
@@ -104,6 +105,19 @@
                     })
                 }    
                 return title
+            },
+            timeFormat(value, show12HourFormat){
+                if(value){
+                    if(show12HourFormat){
+                        let hour = value.substring(0,2)
+                        let minute = value.substring(3,5)
+                        let valueTime =  date.buildDate({hours: hour, minutes: minute})
+                        return date.formatDate(valueTime, 'HH:mm a');
+                    }
+    
+                    return value
+                }
+                return ""
             }
         },
         components:{

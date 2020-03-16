@@ -1,11 +1,59 @@
 <template>
   <q-page>
-    <p>Page settings</p>
+    <div class="q-pa-md">
+      <q-list bordered padding>
+        <q-item-label header>Settings</q-item-label>
+        <q-item tag="label" v-ripple>
+          <q-item-section>
+            <q-item-label>Display 12 hour format</q-item-label>
+          </q-item-section>
+          <q-item-section side >
+            <q-toggle color="blue" v-model="show12HourFormat" val="battery" />
+          </q-item-section>
+        </q-item>
+        <q-item tag="label" v-ripple>
+          <q-item-section>
+            <q-item-label>Display only one wish list</q-item-label>
+          </q-item-section>
+          <q-item-section side >
+            <q-toggle color="blue" v-model="showOneWishList" val="battery" />
+          </q-item-section>
+        </q-item>
+
+      </q-list>
+    </div>
   </q-page>
 </template>
 
 <script>
-export default {
+import { mapState, mapActions } from 'vuex'
 
+export default {
+  data(){
+    return{
+    }
+  },
+  computed:{
+      ...mapState('settings', ['settings']),
+      show12HourFormat:{
+        get(){
+            return this.settings.show12HourFormat
+        },
+        set(value){
+            this.setShow12HourFormat(value)
+        }
+      },
+      showOneWishList: {
+        get(){
+          return this.settings.showOneWishList
+        },
+        set(value){
+            this.setShowOneWishList(value)
+        }
+      }
+  },
+  methods:{
+        ...mapActions('settings', ['setShow12HourFormat','setShowOneWishList'])
+  }
 }
 </script>

@@ -74,7 +74,8 @@ module.exports = function (ctx) {
         'QSelect',
         'QForm',
         'QBanner',
-        'QScrollArea'
+        'QScrollArea',
+        'QToggle'
       ],
       directives: [
         'Ripple',

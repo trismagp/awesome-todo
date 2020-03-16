@@ -9,7 +9,7 @@ const state = {
           description: '',
           url: 'https://cafedelites.com/chicken-cacciatore/',
           date: '2020.02.15',
-          time: '12:30',
+          time: '09:30',
           completed: false
         },
         'ID2':{
@@ -18,62 +18,10 @@ const state = {
           description: '',
           url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
           date: '2020.03.22',
-          time: '12:45',
+          time: '15:45',
           completed: false
         },
         'ID3':{
-          category: 'Food',
-          title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
-          description: '',
-          url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
-          date: '2020.06.27',
-          completed: false
-        },
-        'ID4':{
-          category: 'Restaurant',
-          title: 'Chicken Cacciatore',
-          description: '',
-          url: 'https://cafedelites.com/chicken-cacciatore/',
-          date: '2020.02.15',
-          time: '12:30',
-          completed: false
-        },
-        'ID5':{
-          category: 'Food',
-          title: 'Tarte garlic chicken breasts',
-          description: '',
-          url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
-          date: '2020.03.22',
-          time: '12:45',
-          completed: false
-        },
-        'ID6':{
-          category: 'Food',
-          title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
-          description: '',
-          url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
-          date: '2020.06.27',
-          completed: false
-        },
-        'ID7':{
-          category: 'Restaurant',
-          title: 'Chicken Cacciatore',
-          description: '',
-          url: 'https://cafedelites.com/chicken-cacciatore/',
-          date: '2020.02.15',
-          time: '12:30',
-          completed: false
-        },
-        'ID8':{
-          category: 'Food',
-          title: 'Tarte garlic chicken breasts',
-          description: '',
-          url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
-          date: '2020.03.22',
-          time: '12:45',
-          completed: false
-        },
-        'ID9':{
           category: 'Food',
           title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
           description: '',
@@ -92,7 +40,6 @@ const mutations = {
   },
   deleteWish(state, id){
     Vue.delete(state.wishes, id)
-    console.log('mutation delete: ', id);
   },
   addWish(state , payload){
     Vue.set(state.wishes, payload.id, payload.wish)
@@ -107,7 +54,6 @@ const mutations = {
 
 const actions = {
   updateWish({commit}, payload){
-    console.log('payload: ', payload );
     commit('updateWish', payload)
   },
   deleteWish({commit}, id){
@@ -127,6 +73,7 @@ const actions = {
 }
 
 const getters = {
+
   wishesSorted: (state) => {
     let wishesSorted = {},
       keySorted = {}
@@ -165,6 +112,11 @@ const getters = {
     }
     
     return wishesSorted
+  },
+  wishesAll: (state, getters) => {
+    let wishesFiltered = getters.wishesFiltered
+
+    return wishesFiltered
   },
   wishesTodo: (state, getters) => {
     let wishesFiltered = getters.wishesFiltered

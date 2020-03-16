@@ -7,12 +7,16 @@
       </div>
 
       <q-scroll-area class="q-scroll-area-wishes">
-        <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
-        <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
-          <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
-          <wishes-completed :wishesCompleted="wishesCompleted"/>
+        <div v-if="settings.showOneWishList">
+          <wishes-todo v-if="Object.keys(wishesAll).length" :wishesTodo="wishesAll"/>           
         </div>
-
+        <div v-else>    
+          <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+          <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
+            <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
+            <wishes-completed :wishesCompleted="wishesCompleted"/>
+          </div>
+        </div>
         <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
           <h3>No results</h3>
         </div>
@@ -36,7 +40,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapState } from 'vuex'
 
   export default {
     data(){
@@ -51,7 +55,8 @@
       })
     },
     computed:{
-      ...mapGetters('wishes', ['wishesTodo','wishesCompleted', 'wishesFiltered'])
+      ...mapGetters('wishes', ['wishesAll','wishesTodo','wishesCompleted', 'wishesFiltered']),
+      ...mapState('settings', ['settings'])
     },
     components:{
       'no-wish': require('components/Wishes/Modals/NoWish.vue').default,

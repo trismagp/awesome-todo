@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // import example from './module-example'
 import wishes from './store-wishes'
+import settings from './store-settings'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      wishes
+      wishes,
+      settings
     },
 
     // enable strict mode (adds overhead!)
