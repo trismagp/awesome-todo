@@ -17,7 +17,7 @@
             <wishes-completed :wishesCompleted="wishesCompleted"/>
           </div>
         </div>
-        <div v-if="!(Object.keys(wishesCompleted).length + Object.keys(wishesTodo).length)">
+        <div v-if="!(Object.keys(wishesAll).length)">
           <h3>No results</h3>
         </div>
       </q-scroll-area>

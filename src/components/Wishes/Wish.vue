@@ -112,7 +112,7 @@
                         let hour = value.substring(0,2)
                         let minute = value.substring(3,5)
                         let valueTime =  date.buildDate({hours: hour, minutes: minute})
-                        return date.formatDate(valueTime, 'HH:mm a');
+                        return date.formatDate(valueTime, 'H:mma');
                     }
     
                     return value
