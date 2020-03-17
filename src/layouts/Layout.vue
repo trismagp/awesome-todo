@@ -2,7 +2,8 @@
   <q-layout view="hHh lpR lFf">
     <q-header elevated>
       <q-toolbar>
-         <q-btn class="absolute-right" to="/auth" flat icon-right="account_circle" label="Login"/>
+         <q-btn v-if="!loggedIn" class="absolute-right" to="/auth" flat icon-right="account_circle" label="Login"/>
+         <q-btn v-else class="absolute-right" @click="logoutUser" flat icon-right="account_circle" label="Logout"/>
         <q-toolbar-title class="absolute-center">
           Awesome todo
         </q-toolbar-title>
@@ -52,9 +53,10 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'MyLayout',
-
   data () {
     return {
       leftDrawerOpen: false,
@@ -72,6 +74,12 @@ export default {
 
       ]
     }
+  },
+  computed:{
+    ...mapState('auth', ['loggedIn'])
+  },
+  methods:{
+    ...mapActions('auth',['logoutUser']),
   }
 }
 </script>
