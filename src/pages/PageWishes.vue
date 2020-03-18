@@ -1,41 +1,51 @@
 <template>
   <q-page>
-    <div class="q-pa-md absolute full-width full-height column">
-      <div class="row">
-        <search-bar />
-        <sort :sort.sync="this.sort"/>
-      </div>
+    <template v-if="wishDownloaded">
+      <div class="q-pa-md absolute full-width full-height column">
+        <div class="row">
+          <search-bar />
+          <sort :sort.sync="this.sort"/>
+        </div>
 
-      <q-scroll-area class="q-scroll-area-wishes">
-        <div v-if="settings.showOneWishList">
-          <wishes-todo v-if="Object.keys(wishesAll).length" :wishesTodo="wishesAll"/>           
-        </div>
-        <div v-else>    
-          <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
-          <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
-            <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
-            <wishes-completed :wishesCompleted="wishesCompleted"/>
+        <q-scroll-area class="q-scroll-area-wishes">
+          <div v-if="settings.showOneWishList">
+            <wishes-todo v-if="Object.keys(wishesAll).length" :wishesTodo="wishesAll"/>           
           </div>
-        </div>
-        <div v-if="!(Object.keys(wishesAll).length)">
-          <h3>No results</h3>
-        </div>
-      </q-scroll-area>
-    </div>
-        <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
-      <q-btn 
-        class="all-pointer-events"
-        unelevated 
-        round 
-        color="primary" 
-        icon="add" 
-        clickable
-        @click="showAddWish= !showAddWish"
-      /> 
+          <div v-else>    
+            <wishes-todo v-if="Object.keys(wishesTodo).length" :wishesTodo="wishesTodo"/> 
+            <div v-if="Object.keys(wishesCompleted).length" class="q-mb-xl">
+              <no-wish v-if="!Object.keys(wishesTodo).length"></no-wish>
+              <wishes-completed :wishesCompleted="wishesCompleted"/>
+            </div>
+          </div>
+          <div v-if="!(Object.keys(wishesAll).length)">
+            <h3>No results</h3>
+          </div>
+        </q-scroll-area>
+      </div>
+      <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
+        <q-btn 
+          class="all-pointer-events"
+          unelevated 
+          round 
+          color="primary" 
+          icon="add" 
+          clickable
+          @click="showAddWish= !showAddWish"/> 
           <q-dialog :value="showAddWish">
-      <add-wish @close="showAddWish = false"/>
-    </q-dialog>
-        </div>
+            <add-wish @close="showAddWish = false"/>
+          </q-dialog>
+      </div>
+    </template>
+    <template v-else>
+      <span class="absolute-center">
+          <q-spinner-hourglass
+          color="primary"
+          size="2em"
+        />
+        <q-tooltip :offset="[0, 8]">QSpinnerHourglass</q-tooltip>
+      </span>
+    </template>
   </q-page>
 </template>
 
@@ -56,7 +66,8 @@
     },
     computed:{
       ...mapGetters('wishes', ['wishesAll','wishesTodo','wishesCompleted', 'wishesFiltered']),
-      ...mapState('settings', ['settings'])
+      ...mapState('settings', ['settings']),
+      ...mapState('wishes', ['wishDownloaded'])
     },
     components:{
       'no-wish': require('components/Wishes/Modals/NoWish.vue').default,

@@ -48,6 +48,8 @@ const actions = {
         this.$router.push('/').catch(err => {})
         dispatch('wishes/fbReadData', null, {root: true})
       }else{
+
+        commit('wishes/setWishDownloaded', false, {root: true})
         commit('setLoggedIn',false)
         LocalStorage.set('loggedIn',false)
         this.$router.replace('/auth').catch(err => {})

@@ -79,7 +79,9 @@ module.exports = function (ctx) {
         'QScrollArea',
         'QToggle',
         'QTabPanel',
-        'QTabPanels'
+        'QTabPanels',
+        'QSpinnerHourglass',
+        'QTooltip'
       ],
       directives: [
         'Ripple',

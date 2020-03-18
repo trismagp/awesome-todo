@@ -32,7 +32,8 @@ const state = {
         // }
     },
     search: "",
-    sort: ""
+    sort: "",
+    wishDownloaded: false
 }
 
 const mutations = {
@@ -50,6 +51,9 @@ const mutations = {
   },
   setSort(state, sort){
     state.sort = sort
+  },
+  setWishDownloaded(state, value){
+    state.wishDownloaded = value
   }
 }
 
@@ -74,6 +78,10 @@ const actions = {
   fbReadData({commit}){
     let userId = firebaseAuth.currentUser.uid    
     let userWishes = firebaseDb.ref('wishes/'+userId)
+
+    userWishes.once('value', snapshot =>{
+      commit('setWishDownloaded',true)
+    })
 
     userWishes.on('child_added', snapshot =>{
       let wish = snapshot.val()
