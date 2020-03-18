@@ -60,10 +60,10 @@ const actions = {
   deleteWish({commit}, id){
     commit('deleteWish', id)
   },
-  addWish({commit}, wish){
+  addWish({dispatch}, wish){
     let wishId = uid()
     let payload = {id: wishId, wish: wish}
-    commit('addWish',payload)
+    dispatch('fbAddWish',payload)
   },
   setSearch({commit}, search){
     commit('setSearch', search)
@@ -100,6 +100,14 @@ const actions = {
     
       commit('deleteWish',wishid)
     })
+  },
+  fbAddWish({},payload){
+    console.log(payload);
+
+    let userId = firebaseAuth.currentUser.uid  
+    let wishRef = firebaseDb.ref('wishes/'+userId +"/"+payload.id)
+
+    wishRef.set(payload.wish)
   }
 }
 
