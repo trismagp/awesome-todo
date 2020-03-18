@@ -1,34 +1,35 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
+import { firebaseDb } from 'boot/firebase'
 
 const state = {
     wishes: {
-        'ID1':{
-          category: 'Restaurant',
-          title: 'Chicken Cacciatore',
-          description: '',
-          url: 'https://cafedelites.com/chicken-cacciatore/',
-          date: '2020.02.15',
-          time: '09:30',
-          completed: false
-        },
-        'ID2':{
-          category: 'Food',
-          title: 'Tarte garlic chicken breasts',
-          description: '',
-          url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
-          date: '2020.03.22',
-          time: '15:45',
-          completed: false
-        },
-        'ID3':{
-          category: 'Food',
-          title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
-          description: '',
-          url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
-          date: '2020.06.27',
-          completed: false
-        }
+        // 'ID1':{
+        //   category: 'Restaurant',
+        //   title: 'Chicken Cacciatore',
+        //   description: '',
+        //   url: 'https://cafedelites.com/chicken-cacciatore/',
+        //   date: '2020.02.15',
+        //   time: '09:30',
+        //   completed: false
+        // },
+        // 'ID2':{
+        //   category: 'Food',
+        //   title: 'Tarte garlic chicken breasts',
+        //   description: '',
+        //   url: 'https://cafedelites.com/creamy-garlic-chicken-breasts/',
+        //   date: '2020.03.22',
+        //   time: '15:45',
+        //   completed: false
+        // },
+        // 'ID3':{
+        //   category: 'Food',
+        //   title: 'Lemon Chicken Scallopini with Lemon Garlic Cream Sauce',
+        //   description: '',
+        //   url: 'https://cafedelites.com/lemon-chicken-scallopini-with-lemon-garlic-cream-sauce/',
+        //   date: '2020.06.27',
+        //   completed: false
+        // }
     },
     search: "",
     sort: ""
@@ -69,6 +70,10 @@ const actions = {
   },
   setSort({commit}, sort){
     commit('setSort', sort)
+  },
+  fbReadData({commit}){
+    console.log('fbReadData');
+    
   }
 }
 
