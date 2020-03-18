@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
-import { firebaseDb } from 'boot/firebase'
+import { firebaseAuth, firebaseDb } from '../boot/firebase'
 
 const state = {
     wishes: {
@@ -72,8 +72,34 @@ const actions = {
     commit('setSort', sort)
   },
   fbReadData({commit}){
-    console.log('fbReadData');
+    let userId = firebaseAuth.currentUser.uid    
+    let userWishes = firebaseDb.ref('wishes/'+userId)
+
+    userWishes.on('child_added', snapshot =>{
+      let wish = snapshot.val()
+      let payload = {
+        id: snapshot.key,
+        wish: wish
+      }
+      commit('addWish',payload)
+    })
     
+    userWishes.on('child_changed', snapshot =>{
+      let wish = snapshot.val()
+      let payload = {
+        id: snapshot.key,
+        wish: wish
+      }
+      commit('updateWish',payload)
+    })
+
+    userWishes.on('child_removed', snapshot =>{
+      let wish = snapshot.val()
+   
+      let  wishid= snapshot.key
+    
+      commit('deleteWish',wishid)
+    })
   }
 }
 
