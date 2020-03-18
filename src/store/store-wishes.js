@@ -54,11 +54,11 @@ const mutations = {
 }
 
 const actions = {
-  updateWish({commit}, payload){
-    commit('updateWish', payload)
+  updateWish({dispatch}, payload){
+    dispatch('fbUpdateWish', payload)
   },
-  deleteWish({commit}, id){
-    commit('deleteWish', id)
+  deleteWish({dispatch}, id){
+    dispatch('fbDeleteWish', id)
   },
   addWish({dispatch}, wish){
     let wishId = uid()
@@ -102,12 +102,25 @@ const actions = {
     })
   },
   fbAddWish({},payload){
-    console.log(payload);
-
     let userId = firebaseAuth.currentUser.uid  
     let wishRef = firebaseDb.ref('wishes/'+userId +"/"+payload.id)
 
     wishRef.set(payload.wish)
+  },
+  fbUpdateWish({},payload){
+    console.log(payload);
+    
+    let userId = firebaseAuth.currentUser.uid  
+    let wishRef = firebaseDb.ref('wishes/'+userId +"/"+payload.id)
+
+    wishRef.update(payload.updates)
+  },
+  fbDeleteWish({},wishId){
+    
+    let userId = firebaseAuth.currentUser.uid  
+    let wishRef = firebaseDb.ref('wishes/'+userId +"/"+wishId)
+
+    wishRef.remove()
   }
 }
 
