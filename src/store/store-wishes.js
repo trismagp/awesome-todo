@@ -49,6 +49,9 @@ const mutations = {
   setSearch(state, search){
     state.search = search
   },
+  clearWishes(state){
+    state.wishes = {}
+  },
   setSort(state, sort){
     state.sort = sort
   },
@@ -68,6 +71,9 @@ const actions = {
     let wishId = uid()
     let payload = {id: wishId, wish: wish}
     dispatch('fbAddWish',payload)
+  },
+  clearWishes({commit}){
+    commit('clearWishes')
   },
   setSearch({commit}, search){
     commit('setSearch', search)
