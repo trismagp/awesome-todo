@@ -129,7 +129,7 @@ const actions = {
       }
     })
   },
-  fbUpdateWish({},payload){
+  fbUpdateWish({dispatch},payload){
     let userId = firebaseAuth.currentUser.uid  
     let wishRef = firebaseDb.ref('wishes/'+userId +"/"+payload.id)
 
@@ -137,7 +137,11 @@ const actions = {
       if(error){
         showErrorMessage(error.message)
       }else{
-        Notify.create('Wish updated')
+        dispatch('fbReadData')
+        let payloadKeys = Object.keys(payload.updates)
+        if(payloadKeys.length > 1){
+          Notify.create('Wish updated')
+        }
       }
     })
   },
