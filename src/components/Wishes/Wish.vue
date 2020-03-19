@@ -89,12 +89,16 @@
         },
         filters:{
             niceDate(value){  
-                let year = value.substring(0,4)
-                let month = value.substring(5,7)
-                let day = value.substring(8,10)
-                let valueDate = date.buildDate({year: year, month: month, date: day})
-
-                return date.formatDate(valueDate, 'MMM D, YYYY')
+                if(value){
+                    let year = value.substring(0,4)
+                    let month = value.substring(5,7)
+                    let day = value.substring(8,10)
+                    let valueDate = date.buildDate({year: year, month: month, date: day})
+    
+                    return date.formatDate(valueDate, 'MMM D, YYYY')
+                }else{
+                    return ""
+                }
             },
             searchHighlight(title, search){
                 let searchRegExp = new RegExp(search, 'ig')
@@ -114,7 +118,6 @@
                         let valueTime =  date.buildDate({hours: hour, minutes: minute})
                         return date.formatDate(valueTime, 'H:mma');
                     }
-    
                     return value
                 }
                 return ""
