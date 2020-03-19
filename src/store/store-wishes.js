@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
 import { firebaseAuth, firebaseDb } from '../boot/firebase'
+import {showErrorMessage} from 'src/functions/function-show-error-message'
+import { Notify } from 'quasar'
 
 const state = {
     wishes: {
@@ -119,22 +121,37 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid  
     let wishRef = firebaseDb.ref('wishes/'+userId +"/"+payload.id)
 
-    wishRef.set(payload.wish)
+    wishRef.set(payload.wish, error => {
+      if(error){
+        showErrorMessage(error.message)
+      }else{
+        Notify.create('Wish created')
+      }
+    })
   },
   fbUpdateWish({},payload){
-    console.log(payload);
-    
     let userId = firebaseAuth.currentUser.uid  
     let wishRef = firebaseDb.ref('wishes/'+userId +"/"+payload.id)
 
-    wishRef.update(payload.updates)
+    wishRef.update(payload.updates, error => {
+      if(error){
+        showErrorMessage(error.message)
+      }else{
+        Notify.create('Wish updated')
+      }
+    })
   },
   fbDeleteWish({},wishId){
-    
     let userId = firebaseAuth.currentUser.uid  
     let wishRef = firebaseDb.ref('wishes/'+userId +"/"+wishId)
 
-    wishRef.remove()
+    wishRef.remove(error => {
+      if(error){
+        showErrorMessage(error.message)
+      }else{
+        Notify.create('Wish deleted')
+      }
+    })
   }
 }
 
