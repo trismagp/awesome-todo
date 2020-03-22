@@ -2,7 +2,6 @@
     <q-input 
         class="col" 
         outlined 
-        bottom-slots 
         v-model="searchBar" 
         label="Search" 
         @keyup.esc="searchBar=''"

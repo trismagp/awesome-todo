@@ -2,12 +2,12 @@
   <q-page>
     <template v-if="wishDownloaded">
       <div class="q-pa-md absolute full-width full-height column">
-        <div class="row">
+        <div class="row q-mb-lg">
           <search-bar />
           <sort :sort.sync="this.sort"/>
         </div>
 
-        <q-scroll-area class="q-scroll-area-wishes">
+        <q-scroll-area class="row q-scroll-area-wishes">
           <div v-if="settings.showOneWishList">
             <wishes-todo v-if="Object.keys(wishesAll).length" :wishesTodo="wishesAll"/>           
           </div>
@@ -80,9 +80,19 @@
   }
 </script>
 
-<style scoped>
-  .q-scroll-area-wishes{
-    display: flex;
-    flex-grow: 1;
-  }
+<style lang="scss">
+	.q-scroll-area-wishes {
+		display: flex;
+		flex-grow: 1;
+		.mobile & {
+			flex-basis: 100px;
+		}
+	}
+	.electron {
+		.q-scroll-area-tasks {
+			.scroll {
+				height: auto !important;
+			}
+		}
+	}
 </style>

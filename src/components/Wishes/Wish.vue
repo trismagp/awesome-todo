@@ -2,6 +2,7 @@
     <q-item 
         clickable 
         v-touch-hold:1000.mouse="showEditWishModal"
+        :class="!wish.completed ? 'bg-orange-1' : 'bg-green-1'"
         @click="updateWish({id: id, updates: {completed: !wish.completed}})">
         <q-item-section 
             side 
@@ -11,9 +12,10 @@
                 no-pointer-events/>
         </q-item-section>
         <q-item-section>
-            <q-item-label>{{wish.category}}</q-item-label>
+            <q-item-label :class="{ 'text-strikethrough' : wish.completed }">{{wish.category}}</q-item-label>
             <q-item-label 
                 caption
+                :class="wish.completed ? 'text-strikethrough' : 'bg-green-1'"
                 v-html="$options.filters.searchHighlight(wish.title,search)">
             </q-item-label>
             <q-item-label caption>

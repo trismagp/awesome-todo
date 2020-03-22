@@ -1,14 +1,13 @@
 <template>
     <q-select 
-        clearable
-        map-options
-        emit-value
-        v-model="sortBy" 
-        class="col q-ml-sm"
-        :options="options" 
-        label="Sort by" 
-        stack-label
-        filled/>
+		v-model="sortBy"
+		:options="options"
+		emit-value
+		map-options
+		class="col q-ml-sm"
+		filled
+		label="Sort by"
+		stack-label />
 
 </template>
 
@@ -53,6 +52,6 @@ export default {
 
 <style scoped>
     .q-select {
-        flex: 0 0 120px;
+        flex: 0 0 112px;
     }
 </style>
